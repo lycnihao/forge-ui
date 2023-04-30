@@ -33,9 +33,8 @@ export function updatePassword(params: any) {
  */
 export function getUserInfoById(id: number) {
   return http.request<BasicResponseModel>({
-    url: "/user/info",
+    url: `/user/info/${id}`,
     method: "get",
-    params: { userId: id },
   });
 }
 

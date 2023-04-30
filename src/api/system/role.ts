@@ -17,7 +17,7 @@ export function getRoleList(params) {
  */
 export function getAllRoles() {
   return http.request({
-    url: "/role/getAllRoles",
+    url: "/role/listRole",
     method: "GET",
   });
 }

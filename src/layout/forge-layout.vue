@@ -148,9 +148,7 @@ export default defineComponent({
 }
 
 .forge-layout-content {
-  // margin: 56px 15px 0 15px;
-  padding: 10px;
-  //background: #fff;
+  padding: 15px 15px 0;
   min-height: 280px;
 }
 
