@@ -105,9 +105,9 @@ export function getUserList(params: any) {
 /**
  * @description: 调整当前用户部门
  */
-export function updateDepartment(params: any) {
+export function adjustDepartment(params: any) {
   return http.request<BasicResponseModel>({
-    url: "/user/updateDepartment",
+    url: "/user/adjustDepartment",
     method: "post",
     data: params,
   });
@@ -123,5 +123,5 @@ export default {
   login,
   logout,
   getUserList,
-  updateDepartment,
+  adjustDepartment,
 };

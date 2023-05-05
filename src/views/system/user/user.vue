@@ -173,6 +173,7 @@ import { message } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
 import userApi from "/@/api/system/user";
 import roleApi from "/@/api/system/role";
+import deptApi from "/@/api/system/department";
 
 const columns = [
   {
@@ -292,10 +293,23 @@ const closeModal = () => {
 
 const treeData = ref([]);
 async function loadDept() {
-  // loading.value = true;
-  // const { data } = await deptApi.tree();
-  // treeData.value = getTree(data);
-  // loading.value = false;
+  loading.value = true;
+  const { data } = await deptApi.tree();
+  treeData.value = getTree(data);
+  loading.value = false;
+}
+function getTree(dataList) {
+  return dataList.map((item) => {
+    const children = item.children ? getTree(item.children) : [];
+    return {
+      ...item,
+      key: item.id,
+      value: item.id,
+      title: item.deptName,
+      children: children,
+      isLeaf: children.length == 0,
+    };
+  });
 }
 
 const roleOptions = ref([]);
