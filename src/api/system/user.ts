@@ -29,6 +29,16 @@ export function updatePassword(params: any) {
 }
 
 /**
+ * @description: 重置用户密码
+ */
+export function resetPassword(userId: number) {
+  return http.request<BasicResponseModel>({
+    url: `/user/update/password/password/reset/${userId}`,
+    method: "post",
+  });
+}
+
+/**
  * @description: 获取用户信息
  */
 export function getUserInfoById(id: number) {
@@ -124,4 +134,5 @@ export default {
   logout,
   getUserList,
   adjustDepartment,
+  resetPassword,
 };

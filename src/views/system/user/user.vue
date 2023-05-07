@@ -58,6 +58,20 @@
               编辑
             </a-button>
             <a-popconfirm
+              title="确认重置密码吗?"
+              ok-text="确认"
+              cancel-text="取消"
+              @confirm="handleResPwd(record)"
+            >
+              <a-button
+                type="link"
+                size="small"
+                v-permission:disabled="'system_user_res_password'"
+              >
+                重置密码
+              </a-button>
+            </a-popconfirm>
+            <a-popconfirm
               title="确认删除吗?"
               ok-text="确认"
               cancel-text="取消"
@@ -126,24 +140,6 @@
           <a-form-item label="显示昵称" name="nickname">
             <a-input v-model:value="form.nickname" placeholder="输入昵称" />
           </a-form-item>
-          <a-form-item label="密码" name="password">
-            <a-input
-              type="password"
-              show-password-on="mousedown"
-              placeholder="密码"
-              v-model:value="form.password"
-              :maxlength="125"
-            />
-          </a-form-item>
-          <a-form-item label="确认密码" name="confirmPwd">
-            <a-input
-              type="password"
-              show-password-on="mousedown"
-              placeholder="确认密码"
-              v-model:value="form.confirmPwd"
-              :maxlength="125"
-            />
-          </a-form-item>
           <a-form-item label="邮箱" name="email">
             <a-input v-model:value="form.email" placeholder="输入邮箱" />
           </a-form-item>
@@ -165,15 +161,16 @@
         </a-form>
       </a-spin>
     </a-drawer>
+    <UserPasswordDialog ref="userPasswordDialog" />
   </div>
 </template>
-<script lang="ts" setup name="system_role">
+<script lang="ts" setup name="system_user">
 import { reactive, ref, onMounted } from "vue";
 import { message } from "ant-design-vue";
-import type { Rule } from "ant-design-vue/es/form";
 import userApi from "/@/api/system/user";
 import roleApi from "/@/api/system/role";
 import deptApi from "/@/api/system/department";
+import UserPasswordDialog from "./userPasswordDialog.vue";
 
 const columns = [
   {
@@ -247,8 +244,6 @@ const defaultForm = {
   userId: undefined,
   username: "",
   nickname: "",
-  password: "",
-  confirmPwd: "",
   email: "",
   description: "",
   status: "",
@@ -258,23 +253,10 @@ const defaultForm = {
 
 let form = reactive(Object.assign({}, defaultForm));
 
-let confirmPwdValidate = async (_rule: Rule, value: string) => {
-  if (!_rule.required) {
-    return Promise.resolve();
-  } else if (!value) {
-    return Promise.reject("请输入确认密码");
-  } else if (value !== form.password) {
-    return Promise.reject("两次输入不匹配");
-  } else {
-    return Promise.resolve();
-  }
-};
 const rules = reactive({
   username: [{ required: true, message: "请输入账号", trigger: "blur" }],
   nickname: [{ required: true, message: "请输入用户名称", trigger: "blur" }],
   email: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  confirmPwd: [{ required: true, validator: confirmPwdValidate }],
   roleIds: [
     {
       type: "array",
@@ -318,8 +300,6 @@ async function handleAdd() {
   console.log("点击了新增");
   modalOpen();
   addUserFlag.value = true;
-  rules.password[0].required = true;
-  rules.confirmPwd[0].required = true;
   const roles = await roleApi.getAllRoles();
   loadDept();
   roleOptions.value = roles.data.map(
@@ -332,8 +312,6 @@ async function handleEdit(record: any) {
   modalOpen();
   loadModal.value = true;
   addUserFlag.value = false;
-  rules.password[0].required = false;
-  rules.confirmPwd[0].required = false;
   const roles = await roleApi.getAllRoles();
   roleOptions.value = roles.data.map(
     (r) => new Object({ label: r.name, value: r.id })
@@ -342,6 +320,14 @@ async function handleEdit(record: any) {
   const { data } = await userApi.getUserInfoById(record.userId);
   Object.assign(form, data);
   loadModal.value = false;
+}
+
+const userPasswordDialog = ref();
+async function handleResPwd(record: any) {
+  console.log("点击了重置密码", record);
+  const { data } = await userApi.resetPassword(record.userId);
+  message.success("重置成功");
+  userPasswordDialog.value.showModal(record.username, data);
 }
 
 async function handleDelete(record: any) {
