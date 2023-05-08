@@ -71,12 +71,23 @@ export function updateUserInfo(params: any) {
 }
 
 /**
- * @description: 删除用户信息
+ * @description: 禁用用户信息
  */
-export function deleteUserInfo(userId: number) {
+export function disabledUserInfo(userId: number) {
   return http.request<BasicResponseModel>({
-    url: `/user/delete?userId=${userId}`,
+    url: `/user/disabled?userId=${userId}`,
     method: "post",
+  });
+}
+
+/**
+ * @description: 批量删除用户信息
+ */
+export function batchDeleteUser(params: Array<number>) {
+  return http.request<BasicResponseModel>({
+    url: `/user/batch/delete`,
+    method: "post",
+    data: params,
   });
 }
 
@@ -129,7 +140,8 @@ export default {
   getUserInfoById,
   addUserInfo,
   updateUserInfo,
-  deleteUserInfo,
+  disabledUserInfo,
+  batchDeleteUser,
   login,
   logout,
   getUserList,

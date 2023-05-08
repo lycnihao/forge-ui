@@ -31,9 +31,20 @@
           </template>
           添加用户
         </a-button>
+        <a-button @click="handleBatchDel">
+          <template #icon>
+            <delete-outlined />
+          </template>
+          批量删除
+        </a-button>
       </div>
       <a-table
         size="middle"
+        rowKey="userId"
+        :row-selection="{
+          selectedRowKeys: selectedRowKeys,
+          onChange: onSelectChange,
+        }"
         :columns="columns"
         :data-source="tableData"
         :loading="loading"
@@ -72,17 +83,17 @@
               </a-button>
             </a-popconfirm>
             <a-popconfirm
-              title="确认删除吗?"
+              title="确认禁用吗?"
               ok-text="确认"
               cancel-text="取消"
-              @confirm="handleDelete(record)"
+              @confirm="handleDisabled(record)"
             >
               <a-button
                 type="link"
                 size="small"
-                v-permission:disabled="'system_user_del'"
+                v-permission:disabled="'system_user_dis'"
               >
-                删除
+                禁用
               </a-button>
             </a-popconfirm>
           </template>
@@ -166,7 +177,7 @@
 </template>
 <script lang="ts" setup name="system_user">
 import { reactive, ref, onMounted } from "vue";
-import { message } from "ant-design-vue";
+import { Modal, message } from "ant-design-vue";
 import userApi from "/@/api/system/user";
 import roleApi from "/@/api/system/role";
 import deptApi from "/@/api/system/department";
@@ -330,11 +341,32 @@ async function handleResPwd(record: any) {
   userPasswordDialog.value.showModal(record.username, data);
 }
 
-async function handleDelete(record: any) {
-  console.log("点击了删除", record);
-  await userApi.deleteUserInfo(record.userId);
-  message.success("删除成功");
+async function handleDisabled(record: any) {
+  console.log("点击了禁用", record);
+  await userApi.disabledUserInfo(record.userId);
+  message.success("禁用成功");
   queryData();
+}
+
+const selectedRowKeys = ref([]);
+const onSelectChange = (rowKeys: any) => {
+  console.log("selectedRowKeys changed: ", rowKeys);
+  selectedRowKeys.value = rowKeys;
+};
+async function handleBatchDel() {
+  Modal.confirm({
+    title: "提示",
+    content: "您确定要删除选中用户吗",
+    okText: "确定",
+    cancelText: "取消",
+    onOk: async () => {
+      console.log("点击了批量删除");
+      await userApi.batchDeleteUser(selectedRowKeys.value);
+      message.success("批量删除成功");
+      queryData();
+    },
+    onCancel: () => {},
+  });
 }
 
 const formRef: any = ref(null);
