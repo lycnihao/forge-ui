@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 import { useUserStoreWidthOut } from "/@/store/modules/user";
 import { message as $message, Modal } from "ant-design-vue";
 import { BasicResponseModel } from "/@/types/http";
-// import { checkStatus } from "./checkStatus";
+import { checkStatus } from "./checkStatus";
 
 const authenticationScheme = "Bearer";
 
@@ -78,8 +78,7 @@ export class VAxios {
         // 请求是否被取消
         const isCancel = axios.isCancel(error);
         if (!isCancel) {
-          $message.error(msg);
-          // checkStatus(error.response && error.response.status, msg);
+          checkStatus(error.response && error.response.status, msg);
         } else {
           console.warn(error, "请求被取消！");
         }
