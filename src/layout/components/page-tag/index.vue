@@ -177,20 +177,20 @@ const reloadPage = () => {
 // 注入刷新页面方法
 provide("reloadPage", reloadPage);
 // 关闭左侧
-const closeLeft = () => {
-  tabsViewStore.closeLeftTabs(route);
-  state.activeKey = route.fullPath;
-  state.selectedKey = route.name;
-  router.replace(route.fullPath);
-};
+// const closeLeft = () => {
+//   tabsViewStore.closeLeftTabs(route);
+//   state.activeKey = route.fullPath;
+//   state.selectedKey = route.name;
+//   router.replace(route.fullPath);
+// };
 
 // 关闭右侧
-const closeRight = () => {
-  tabsViewStore.closeRightTabs(route);
-  state.activeKey = route.fullPath;
-  state.selectedKey = route.name;
-  router.replace(route.fullPath);
-};
+// const closeRight = () => {
+//   tabsViewStore.closeRightTabs(route);
+//   state.activeKey = route.fullPath;
+//   state.selectedKey = route.name;
+//   router.replace(route.fullPath);
+// };
 
 // 关闭其他
 const closeOther = () => {

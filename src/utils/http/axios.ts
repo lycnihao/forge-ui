@@ -102,7 +102,7 @@ export class VAxios {
         .request<any, AxiosResponse<BasicResponseModel>>(config)
         .then((res: AxiosResponse<BasicResponseModel>) => {
           // 请求是否被取消
-          const isCancel = axios.isCancel(res);
+          // const isCancel = axios.isCancel(res);
           //  这里 success,errMessage 后台统一的字段，需要修改为项目自己的接口返回格式
           const { success, errMessage } = res.data;
           // 接口请求成功，直接返回结果

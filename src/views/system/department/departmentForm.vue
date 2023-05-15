@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs, watch } from "vue";
+import { defineComponent, ref, reactive, watch } from "vue";
 import { message } from "ant-design-vue";
 import deptApi from "../../../api/system/department";
 
@@ -40,7 +40,6 @@ export default defineComponent({
   name: "DeptForm",
   props: {
     form: Object,
-    addFlag: Boolean,
     treeData: {
       type: Array,
       default() {
@@ -53,7 +52,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { addFlag } = toRefs(props);
     const formParams = reactive({
       id: undefined,
       parentId: undefined,

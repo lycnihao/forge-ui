@@ -118,7 +118,7 @@ export function createRouterGuards(router: Router) {
     NProgress.done();
   });
 
-  router.afterEach((to, _, failure) => {
+  router.afterEach((to, _, _failure) => {
     document.title = (to?.meta?.title as string) || document.title;
     const asyncRouteStore = useAsyncRouteStoreWidthOut();
     // 在这里设置需要缓存的组件名称

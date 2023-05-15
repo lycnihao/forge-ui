@@ -78,7 +78,7 @@ export const asyncImportRoute = (routes: any[] | undefined): void => {
     if (!item.component && item.meta?.frameSrc) {
       item.component = "IFRAME";
     }
-    const { component, name } = item;
+    const { component } = item;
     const { children } = item;
     if (component) {
       const layoutFound = LayoutMap.get(component as string);

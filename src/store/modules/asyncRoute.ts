@@ -2,7 +2,7 @@ import { toRaw } from "vue";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { RouteRecordRaw } from "vue-router";
-import { asyncRoutes, constantRouter } from "/@/router/index";
+import { constantRouter } from "/@/router/index";
 import { generatorDynamicRouter } from "/@/router/generator-routers";
 
 export interface IAsyncRouteState {

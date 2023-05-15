@@ -46,13 +46,13 @@ function showModal(loginName, loginPassword) {
 }
 function handleCopy() {
   let clipboard = new Clipboard(".account-copy");
-  clipboard.on("success", (e) => {
+  clipboard.on("success", (_e) => {
     message.info("复制成功");
     console.log("复制成功");
     //  释放内存
     clipboard.destroy();
   });
-  clipboard.on("error", (e) => {
+  clipboard.on("error", (_e) => {
     // 不支持复制
     message.error("浏览器不支持复制，请您手动选择复制");
     // 释放内存

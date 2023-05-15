@@ -32,7 +32,7 @@
         :pagination="false"
         bordered
       >
-        <template #bodyCell="{ text, record, column }">
+        <template #bodyCell="{ text, column }">
           <template v-if="column.dataIndex === 'loginResult'">
             <template v-if="text === 0">
               <a-tag color="success">登录成功</a-tag>
