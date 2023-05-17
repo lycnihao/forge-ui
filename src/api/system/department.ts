@@ -14,7 +14,7 @@ export function tree() {
 /**
  * @description: 添加部门信息
  */
-export function addDept(params) {
+export function addDept(params: any) {
   return http.request<BasicResponseModel>({
     url: "/department/add",
     method: "post",
@@ -25,7 +25,7 @@ export function addDept(params) {
 /**
  * @description: 更新部门信息
  */
-export function updateDept(params) {
+export function updateDept(params: any) {
   return http.request<BasicResponseModel>({
     url: "/department/update",
     method: "post",

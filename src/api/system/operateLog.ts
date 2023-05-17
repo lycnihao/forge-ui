@@ -3,7 +3,7 @@ import { http } from "/@/utils/http/request";
 /**
  * @description: 获取操作日志列表
  */
-export function getOperateLog(params) {
+export function getOperateLog(params: any) {
   return http.request({
     url: "/operateLog/list",
     method: "GET",
@@ -11,7 +11,7 @@ export function getOperateLog(params) {
   });
 }
 
-export function getOperateLogDetail(operateLogId) {
+export function getOperateLogDetail(operateLogId: any) {
   return http.request({
     url: `/operateLog/detail/${operateLogId}`,
     method: "GET",

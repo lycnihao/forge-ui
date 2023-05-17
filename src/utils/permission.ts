@@ -35,7 +35,7 @@ export const permission: ObjectDirective = {
 
     if (disabled && el) {
       el.disabled = true;
-      el.style["disabled"] = "disabled";
+      el.style["disabled" as any] = "disabled";
       el.classList.add("a-button--disabled");
       return;
     }

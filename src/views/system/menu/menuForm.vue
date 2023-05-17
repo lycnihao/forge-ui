@@ -98,6 +98,20 @@ import { defineComponent, ref, reactive, toRefs, computed, watch } from "vue";
 import { message, Modal } from "ant-design-vue";
 import permissionApi from "/@/api/system/permission";
 
+export interface FormParams {
+  id: number | undefined;
+  type: number;
+  parentKey: string;
+  title: string;
+  icon: string;
+  path: string;
+  redirect: string;
+  name: string;
+  sort: number;
+  component: string;
+  keepAlive: boolean;
+}
+
 export default defineComponent({
   name: "MenuForm",
   props: {
@@ -116,7 +130,19 @@ export default defineComponent({
   },
   setup(props) {
     const { addFlag } = toRefs(props);
-    const formParams = reactive({});
+    const formParams: FormParams = reactive({
+      id: undefined,
+      type: 1,
+      parentKey: "",
+      title: "",
+      icon: "",
+      path: "",
+      redirect: "",
+      name: "",
+      sort: 1,
+      component: "",
+      keepAlive: true,
+    });
     const rules = {
       type: {
         required: true,

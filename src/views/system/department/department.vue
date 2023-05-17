@@ -121,7 +121,7 @@ let formParams = reactive({
 });
 Object.assign(formParams, defaultForm);
 
-function showCreateModal(parentId) {
+function showCreateModal(parentId: any) {
   isDrawer.value = true;
   resetForm();
   if (treeItemKey.value.length > 0) {
@@ -133,7 +133,7 @@ function showCreateModal(parentId) {
   }
 }
 
-function showUpdateModal(key) {
+function showUpdateModal(key: any) {
   isDrawer.value = true;
   const treeItem = getTreeItem(unref(treeData), key);
   treeItemTitle.value = treeItem.title;
@@ -148,7 +148,7 @@ function resetForm() {
   Object.assign(formParams, defaultForm);
 }
 
-function selectedTree(keys) {
+function selectedTree(keys: any) {
   if (keys.length) {
     const treeItem = getTreeItem(unref(treeData), keys[0]);
     treeItemKey.value = keys;
@@ -171,7 +171,7 @@ function drawerSubmit() {
   isDrawer.value = false;
 }
 
-function onDelete(deptId) {
+function onDelete(deptId: any) {
   Modal.info({
     title: "提示",
     content: `您确定想删除此部门吗?`,
@@ -188,7 +188,7 @@ function onDelete(deptId) {
   });
 }
 
-function onExpandedKeys(keys) {
+function onExpandedKeys(keys: any) {
   expandedKeys.value = keys;
 }
 
@@ -219,8 +219,8 @@ function reloadTree() {
   loadDept();
 }
 
-function getTree(dataList) {
-  return dataList.map((item) => {
+function getTree(dataList: any) {
+  return dataList.map((item: any) => {
     const children = item.children ? getTree(item.children) : [];
     return {
       ...item,

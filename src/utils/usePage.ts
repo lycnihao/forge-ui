@@ -18,7 +18,7 @@ function handleError(e: Error) {
 /**
  * 页面切换
  */
-export function useGo(_router?: Router) {
+export function useGo(_router?: Router | any) {
   let router;
   if (!_router) {
     router = useRouter();

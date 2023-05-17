@@ -10,8 +10,8 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 let currentRoute = useRoute();
-const generator: any = (routerMap) => {
-  return routerMap.map((item) => {
+const generator: any = (routerMap: any) => {
+  return routerMap.map((item: any) => {
     const currentMenu = {
       ...item,
       label: item.meta.title,

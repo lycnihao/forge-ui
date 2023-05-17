@@ -1,7 +1,7 @@
 /**
  *  找到对应的节点
  * */
-let result = null;
+let result: any = null;
 export function getTreeItem(data: any[], key?: string | number): any {
   data.map((item) => {
     if (item.key === key) {

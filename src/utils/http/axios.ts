@@ -21,7 +21,7 @@ export class VAxios {
      * @description: 添加请求拦截器
      */
     this.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: AxiosRequestConfig | any) => {
         // 在发送请求之前添加token
         const userStore = useUserStoreWidthOut();
         const token = userStore.getToken;

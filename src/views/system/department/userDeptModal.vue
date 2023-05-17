@@ -35,7 +35,7 @@ const cancelModal = () => {
   updateDeptModal.value = false;
   departmentId.value = undefined;
 };
-function onChange(id) {
+function onChange(id: any) {
   departmentId.value = id;
 }
 const updateDept = async () => {

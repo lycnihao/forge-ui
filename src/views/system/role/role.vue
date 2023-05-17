@@ -272,8 +272,8 @@ function confirmForm(e: any) {
   });
 }
 
-function getTreePermissions(permissions, checkedPermissions) {
-  return permissions.map((item) => {
+function getTreePermissions(permissions: any, checkedPermissions: any) {
+  return permissions.map((item: any) => {
     const children = item.children
       ? getTreePermissions(item.children, checkedPermissions)
       : [];
@@ -289,8 +289,8 @@ function getTreePermissions(permissions, checkedPermissions) {
   });
 }
 
-function onCheck(_checkedKeysValue: any, e) {
-  const checkedNodes = e.checkedNodes.map((node) => node.key);
+function onCheck(_checkedKeysValue: any, e: any) {
+  const checkedNodes = e.checkedNodes.map((node: any) => node.key);
   const halfCheckedKeys = e.halfCheckedKeys;
   console.log(checkedNodes);
   console.log(halfCheckedKeys);

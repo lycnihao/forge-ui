@@ -291,8 +291,8 @@ async function loadDept() {
   treeData.value = getTree(data);
   loading.value = false;
 }
-function getTree(dataList) {
-  return dataList.map((item) => {
+function getTree(dataList: any) {
+  return dataList.map((item: any) => {
     const children = item.children ? getTree(item.children) : [];
     return {
       ...item,
@@ -314,7 +314,7 @@ async function handleAdd() {
   const roles = await roleApi.getAllRoles();
   loadDept();
   roleOptions.value = roles.data.map(
-    (r) => new Object({ label: r.name, value: r.id })
+    (r: any) => new Object({ label: r.name, value: r.id })
   );
 }
 
@@ -325,7 +325,7 @@ async function handleEdit(record: any) {
   addUserFlag.value = false;
   const roles = await roleApi.getAllRoles();
   roleOptions.value = roles.data.map(
-    (r) => new Object({ label: r.name, value: r.id })
+    (r: any) => new Object({ label: r.name, value: r.id })
   );
   loadDept();
   const { data } = await userApi.getUserInfoById(record.userId);

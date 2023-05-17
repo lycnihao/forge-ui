@@ -64,15 +64,15 @@ defineExpose({
 
 const visible = ref(false);
 
-function show(operateLogId) {
+function show(operateLogId: number) {
   visible.value = true;
   clear(detail);
   getDetail(operateLogId);
 }
 
-const clear = (info) => {
+const clear = (info: any) => {
   const keys = Object.keys(info);
-  let obj = {};
+  let obj: any = {};
   keys.forEach((item) => {
     obj[item] = "";
   });
@@ -86,8 +86,16 @@ function close() {
 let detail = reactive({
   param: "",
   url: "",
+  createTime: "",
+  method: "",
+  operateUserId: "",
+  operateUserName: "",
+  module: "",
+  content: "",
+  successFlag: "",
+  failReason: "",
 });
-async function getDetail(operateLogId) {
+async function getDetail(operateLogId: number) {
   try {
     let res = await operateLogApi.getOperateLogDetail(operateLogId);
     detail = Object.assign(detail, res.data);

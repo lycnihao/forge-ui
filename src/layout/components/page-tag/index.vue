@@ -77,7 +77,7 @@ const state = reactive({
 });
 
 // 获取简易的路由对象
-const getSimpleRoute = (route): RouteItem => {
+const getSimpleRoute = (route: any): RouteItem => {
   const { fullPath, hash, meta, name, params, path, query } = route;
   return { fullPath, hash, meta, name, params, path, query };
 };
@@ -150,9 +150,9 @@ watch(
 );
 
 // 关闭当前页面
-const removeTab = (_route) => {
-  if (!_route) {
-    _route = route;
+const removeTab = (route: any) => {
+  if (!route) {
+    route = route;
   }
   if (tabsList.value.length === 1) {
     return message.warning("这已经是最后一页，不能再关闭了！");
@@ -207,9 +207,9 @@ const closeAll = () => {
 };
 
 //tags 跳转页面
-function goPage(tabsKey) {
+function goPage(tabsKey: any) {
   const { name, fullPath } = route;
-  const goRoute = tabsList.value.find((item) => item.name == tabsKey);
+  const goRoute = tabsList.value.find((item: any) => item.name == tabsKey);
   if (fullPath === goRoute.fullPath) return;
   state.activeKey = fullPath;
   state.selectedKey = name;
@@ -217,9 +217,11 @@ function goPage(tabsKey) {
 }
 
 //删除tab
-function closeTabItem(e) {
+function closeTabItem(e: any) {
   const { fullPath } = e;
-  const routeInfo = tabsList.value.find((item) => item.fullPath == fullPath);
+  const routeInfo = tabsList.value.find(
+    (item: any) => item.fullPath == fullPath
+  );
   removeTab(routeInfo);
 }
 </script>

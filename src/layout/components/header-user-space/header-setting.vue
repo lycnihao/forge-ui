@@ -99,13 +99,13 @@ function copy() {
 
 function reset() {
   for (const k in projectSetting) {
-    formState[k] = projectSetting[k];
+    formState[k] = projectSetting[k as keyof typeof projectSetting];
   }
   projectSettingStore.reset();
 }
 
 const projectSettingStore = useProjectSettingStore();
-useProjectSettingStore().$subscribe((mutation, state) => {
+useProjectSettingStore().$subscribe((_mutation: any, state: any) => {
   storage.set(PROJECT_SETTING, JSON.stringify(state));
 });
 
@@ -120,27 +120,27 @@ let formValue = {
   // 页脚
   footerFlag: projectSettingStore.footerFlag,
 };
-let formState = reactive({ ...formValue });
+let formState: any = reactive({ ...formValue });
 
-function changeMenuTheme(e) {
+function changeMenuTheme(e: any) {
   projectSettingStore.$patch({
     sideMenuTheme: e.target.value,
   });
 }
 
-function changeBreadCrumbFlag(e) {
+function changeBreadCrumbFlag(e: any) {
   projectSettingStore.$patch({
     breadCrumbFlag: e,
   });
 }
 
-function changePageTagFlag(e) {
+function changePageTagFlag(e: any) {
   projectSettingStore.$patch({
     pageTagFlag: e,
   });
 }
 
-function changeFooterFlag(e) {
+function changeFooterFlag(e: any) {
   projectSettingStore.$patch({
     footerFlag: e,
   });

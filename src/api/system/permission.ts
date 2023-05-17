@@ -14,7 +14,7 @@ export function getAllPermission() {
 /**
  * @description: 添加权限信息
  */
-export function addPermissionInfo(params) {
+export function addPermissionInfo(params: any) {
   return http.request<BasicResponseModel>({
     url: "/permission/add",
     method: "post",
@@ -25,7 +25,7 @@ export function addPermissionInfo(params) {
 /**
  * @description: 更新权限信息
  */
-export function updatePermissionInfo(params) {
+export function updatePermissionInfo(params: any) {
   return http.request<BasicResponseModel>({
     url: "/permission/update",
     method: "post",
@@ -36,7 +36,7 @@ export function updatePermissionInfo(params) {
 /**
  * @description: 删除权限信息
  */
-export function deletePermissionInfo(permissionId: number) {
+export function deletePermissionInfo(permissionId: any) {
   return http.request<BasicResponseModel>({
     url: `/permission/delete`,
     method: "post",

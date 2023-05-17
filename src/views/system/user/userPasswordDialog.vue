@@ -39,7 +39,7 @@ function copy() {
   handleCopy();
   visible.value = false;
 }
-function showModal(loginName, loginPassword) {
+function showModal(loginName: any, loginPassword: any) {
   visible.value = true;
   showLoginName.value = loginName;
   showLoginPassword.value = loginPassword;

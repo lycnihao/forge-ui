@@ -7,7 +7,7 @@ import { useAsyncRouteStoreWidthOut } from "/@/store/modules/asyncRoute";
 import ForgeLayout from "/@/layout/forge-layout.vue";
 import { PageEnum } from "/@/enums/pageEnum";
 
-const whitePathList = [PageEnum.BASE_LOGIN];
+const whitePathList: string[] = [PageEnum.BASE_LOGIN];
 
 // 404 on a page
 export const ErrorPageRoute = {

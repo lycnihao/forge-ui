@@ -139,7 +139,9 @@ const defaultForm = {
   sort: 1,
   keepAlive: true,
 };
-const formParams = reactive({});
+const formParams = reactive({
+  parentKey: "",
+});
 Object.assign(formParams, defaultForm);
 
 function openCreateDrawer() {
@@ -156,7 +158,7 @@ function resetForm() {
   Object.assign(formParams, defaultForm);
 }
 
-function selectedTree(keys) {
+function selectedTree(keys: any) {
   if (keys.length) {
     const treeItem = getTreeItem(unref(treeData), keys[0]);
     treeItemKey.value = keys;
@@ -170,7 +172,7 @@ function selectedTree(keys) {
   }
 }
 
-function onExpandedKeys(keys) {
+function onExpandedKeys(keys: any) {
   expandedKeys.value = keys;
 }
 
@@ -214,8 +216,8 @@ function reloadTree() {
   loadPermission();
 }
 
-function getTreePermissions(permissions) {
-  return permissions.map((item) => {
+function getTreePermissions(permissions: any) {
+  return permissions.map((item: any) => {
     const children = item.children ? getTreePermissions(item.children) : [];
     return {
       ...item,

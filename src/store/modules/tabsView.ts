@@ -30,11 +30,11 @@ export const useTabsViewStore = defineStore({
   }),
   getters: {},
   actions: {
-    initTabs(routes) {
+    initTabs(routes: RouteItem[]) {
       // 初始化标签页
       this.tabsList = routes;
     },
-    addTabs(route): boolean {
+    addTabs(route: any): boolean {
       // 添加标签页
       if (whiteList.includes(route.name)) return false;
       const isExists = this.tabsList.some(
@@ -48,11 +48,11 @@ export const useTabsViewStore = defineStore({
       // }
       return true;
     },
-    setHomeTab(route): boolean {
+    setHomeTab(route: any): boolean {
       this.tabsList.unshift(route);
       return true;
     },
-    closeLeftTabs(route) {
+    closeLeftTabs(route: any) {
       // 关闭左侧
       const index = this.tabsList.findIndex(
         (item) => item.fullPath == route.fullPath
@@ -61,7 +61,7 @@ export const useTabsViewStore = defineStore({
         (item, i) => i >= index || (item?.meta?.affix ?? false)
       );
     },
-    closeRightTabs(route) {
+    closeRightTabs(route: any) {
       // 关闭右侧
       const index = this.tabsList.findIndex(
         (item) => item.fullPath == route.fullPath
@@ -70,14 +70,14 @@ export const useTabsViewStore = defineStore({
         (item, i) => i <= index || (item?.meta?.affix ?? false)
       );
     },
-    closeOtherTabs(route) {
+    closeOtherTabs(route: any) {
       // 关闭其他
       this.tabsList = this.tabsList.filter(
         (item) =>
           item.fullPath == route.fullPath || (item?.meta?.affix ?? false)
       );
     },
-    closeCurrentTab(route) {
+    closeCurrentTab(route: any) {
       // 关闭当前页
       const index = this.tabsList.findIndex(
         (item) => item.fullPath == route.fullPath

@@ -4,7 +4,7 @@ import { BasicResponseModel } from "/@/types/http";
 /**
  * @description: 角色列表
  */
-export function getRoleList(params) {
+export function getRoleList(params: any) {
   return http.request({
     url: "/role/list",
     method: "GET",
@@ -35,7 +35,7 @@ export function getRoleInfo(id: number) {
 /**
  * @description: 添加角色信息
  */
-export function addRoleInfo(params) {
+export function addRoleInfo(params: any) {
   return http.request<BasicResponseModel>({
     url: "/role/add",
     method: "post",
@@ -46,7 +46,7 @@ export function addRoleInfo(params) {
 /**
  * @description: 更新角色信息
  */
-export function updateRoleInfo(params) {
+export function updateRoleInfo(params: any) {
   return http.request<BasicResponseModel>({
     url: "/role/update",
     method: "post",

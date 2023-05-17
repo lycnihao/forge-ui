@@ -15,7 +15,7 @@ import User from "./userList.vue";
 
 const userList = ref();
 
-function onChange(id) {
+function onChange(id: any) {
   userList.value.queryDataByDepartmentId(id);
 }
 </script>

@@ -39,26 +39,26 @@ export const useAsyncRouteStore = defineStore({
       this.isDynamicAddedRoute = added;
     },
     // 设置动态路由
-    setRouters(routers) {
+    setRouters(routers: any) {
       this.addRouters = routers;
       this.routers = constantRouter.concat(routers);
     },
-    setMenus(menus) {
+    setMenus(menus: any) {
       // 设置动态路由
       this.menus = menus;
     },
-    setKeepAliveComponents(compNames) {
+    setKeepAliveComponents(compNames: string[]) {
       // 设置需要缓存的组件
       this.keepAliveComponents = compNames;
     },
-    async generateRoutes(data) {
+    async generateRoutes(data: any) {
       let accessedRouters = [] as any;
       const permissionsList = data.permissions || [];
-      const routeFilter = (route) => {
+      const routeFilter = (route: any) => {
         const { meta } = route;
         const { permissions } = meta || {};
         if (!permissions) return true;
-        return permissionsList.some((item) => permissions.includes(item.value));
+        return permissionsList.some((item: any) => permissions.includes(item.value));
       };
       // 动态获取菜单
       try {
