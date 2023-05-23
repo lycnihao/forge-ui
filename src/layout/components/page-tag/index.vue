@@ -151,9 +151,6 @@ watch(
 
 // 关闭当前页面
 const removeTab = (route: any) => {
-  if (!route) {
-    route = route;
-  }
   if (tabsList.value.length === 1) {
     return message.warning("这已经是最后一页，不能再关闭了！");
   }

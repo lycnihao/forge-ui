@@ -3,25 +3,22 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true,
+    es2021: true,
   },
   parser: "vue-eslint-parser",
   parserOptions: {
+    ecmaVersion: 12,
     parser: "@typescript-eslint/parser",
-    ecmaVersion: 2020,
     sourceType: "module",
-    jsxPragma: "React",
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
   extends: [
-    "plugin:vue/vue3-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:prettier/recommended",
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    'plugin:vue/base'
   ],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {
+    // Enable vue/script-setup-uses-vars rule
     "vue/script-setup-uses-vars": "error",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -37,17 +34,15 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-      },
+      // we are only using this rule to check for unused arguments since TS
+      // catches unused variables but not args.
+      { varsIgnorePattern: '.*', args: 'none' }
     ],
     "no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-      },
+      'error',
+      // we are only using this rule to check for unused arguments since TS
+      // catches unused variables but not args.
+      { varsIgnorePattern: '.*', args: 'none' }
     ],
     "space-before-function-paren": "off",
 

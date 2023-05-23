@@ -96,12 +96,8 @@ let detail = reactive({
   failReason: "",
 });
 async function getDetail(operateLogId: number) {
-  try {
-    let res = await operateLogApi.getOperateLogDetail(operateLogId);
+  let res = await operateLogApi.getOperateLogDetail(operateLogId);
     detail = Object.assign(detail, res.data);
-  } catch (e) {
-  } finally {
-  }
 }
 </script>
 
