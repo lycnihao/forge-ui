@@ -245,7 +245,7 @@ function modalOpen() {
   showModal.value = true;
 }
 function modalClose() {
-  showModal.value = true;
+  showModal.value = false;
 }
 
 const loadModal = ref(false);
