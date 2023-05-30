@@ -86,7 +86,7 @@ export const useUserStore = defineStore({
         this.setAvatar(result.avatar);
         return Promise.resolve(response);
       } catch (e) {
-        return Promise.reject(e);
+        return Promise.resolve(e);
       }
     },
 
