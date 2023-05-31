@@ -3,6 +3,7 @@ import { store } from "/@/store";
 import { storage } from "/@/utils/storage";
 import { ACCESS_TOKEN, CURRENT_USER } from "/@/store/mutation-types";
 import { getUserInfo, login, logout } from "/@/api/system/user";
+import { BasicResponseModel } from "/@/types/http";
 
 export interface IUserState {
   token: string;
@@ -85,7 +86,7 @@ export const useUserStore = defineStore({
         }
         this.setAvatar(result.avatar);
         return Promise.resolve(response);
-      } catch (e) {
+      } catch (e: BasicResponseModel<any> | any) {
         return Promise.resolve(e);
       }
     },
