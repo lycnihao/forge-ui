@@ -19,9 +19,7 @@
       <div class="w-full">
         <a-input type="input" v-model:value="pattern" placeholder="输入分类名称搜索">
           <template #suffix>
-            <a-icon size="18" class="cursor-pointer">
-              <SearchOutlined />
-            </a-icon>
+            <SearchOutlined />
           </template>
         </a-input>
         <div class="py-3">

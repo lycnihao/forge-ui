@@ -22,7 +22,7 @@
         </span>
       </div>
       <a-table
-        rowKey="userId"
+        rowKey="code"
         :row-selection="{
           selectedRowKeys: selectedRowKeys,
           onChange: onSelectChange,
