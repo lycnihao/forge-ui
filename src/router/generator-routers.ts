@@ -57,6 +57,8 @@ export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
     adminMenus()
       .then((result) => {
         const routeList = routerGenerator(result.data);
+        sortBySortField(routeList);
+        console.log(routeList);
         asyncImportRoute(routeList);
 
         resolve(routeList);
@@ -120,3 +122,17 @@ export const dynamicImport = (
     return;
   }
 };
+
+
+/**
+ * 按sort排序
+ * @param arr 
+ */
+function sortBySortField(routeList: any[]) {
+  routeList.sort((a, b) => a.meta.sort - b.meta.sort);
+  routeList.forEach((item) => {
+      if (item.children && item.children.length > 0) {
+          sortBySortField(item.children);
+      }
+  });
+}
