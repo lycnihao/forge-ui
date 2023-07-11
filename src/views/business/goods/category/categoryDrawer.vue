@@ -11,13 +11,13 @@
               </a-form-item>
             </a-col>
             <a-col :span="12">
-              <a-form-item :label-col="{ offset: 4 }" label="分类编码" name="name" :rule="rules.name">
-                <a-input :placeholder="`分类编码`" v-model:value="formParams.name" />
+              <a-form-item :label-col="{ offset: 4 }" label="分类编码" name="code" :rule="rules.code">
+                <a-input :placeholder="`分类编码`" v-model:value="formParams.code"/>
               </a-form-item>
             </a-col>
             <a-col :span="12">
-              <a-form-item :label-col="{ offset: 4 }" label="分类名称" name="code" :rule="rules.code">
-                <a-input :placeholder="`分类名称`" v-model:value="formParams.code" />
+              <a-form-item :label-col="{ offset: 4 }" label="分类名称" name="name" :rule="rules.name">
+                <a-input :placeholder="`分类名称`" v-model:value="formParams.name" />
               </a-form-item>
             </a-col>
             <a-col :span="24">
@@ -140,7 +140,12 @@
     formRef.value.validateFields().then(async () => {
       submitLoading.value = true;
       try {
-        formParams.categoryAttribute = categoryAttributeModalRef.value.attributes();
+        if (categoryAttributeModalRef.value) {
+          formParams.categoryAttribute = categoryAttributeModalRef.value.attributes();
+        }
+        if (typeof formParams.parentId == "object") {
+          formParams.parentId = undefined;
+        }
         if (operateType.value == 'add') {
           await categoryApi.addCategory(formParams);
         }

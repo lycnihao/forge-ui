@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    v-model:visible="updateDeptModal"
+    v-model:open="updateDeptModal"
     :confirm-loading="updateDeptLoading"
     title="调整部门"
     ok-text="确认"

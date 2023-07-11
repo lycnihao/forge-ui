@@ -1,15 +1,17 @@
 <template>
-  <a-row justify="space-between" :gutter="16">
-    <a-col span="6">
-      <CategoryTree :loading="loading" :treeData="treeData" @change="selectedTree" @openDrawer="openDrawer" @reloadTree="reloadTree" />
-    </a-col>
-    <a-col span="18">
-      <SubCategoryList ref="subCategoryListRef" :treeItemKey="treeItemKey" @openDrawer="openDrawer" @reloadTree="reloadTree" />
-    </a-col>
-  </a-row>
-  <CategoryDrawer ref="categoryDrawerRef" :operateFlag="operateFlag" :treeData="treeData" @refresh="reloadTree" />
+  <div>
+    <a-row justify="space-between" :gutter="16">
+      <a-col span="6">
+        <CategoryTree :loading="loading" :treeData="treeData" @change="selectedTree" @openDrawer="openDrawer" @reloadTree="reloadTree" />
+      </a-col>
+      <a-col span="18">
+        <SubCategoryList ref="subCategoryListRef" :treeItemKey="treeItemKey" @openDrawer="openDrawer" @reloadTree="reloadTree" />
+      </a-col>
+    </a-row>
+    <CategoryDrawer ref="categoryDrawerRef" :operateFlag="operateFlag" :treeData="treeData" @refresh="reloadTree" />
+  </div>
 </template>
-<script lang="ts" setup name="system_category">
+<script lang="ts" setup name="goods_category">
   import { ref } from 'vue';
   import CategoryTree from './categoryTree.vue';
   import SubCategoryList from './subCategoryList.vue';

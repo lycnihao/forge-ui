@@ -73,7 +73,7 @@
     </a-card>
     <a-drawer
       placement="right"
-      v-model:visible="showModal"
+      v-model:open="showModal"
       :title="addRoleFlag ? '新增角色' : '编辑角色'"
       :width="502"
       :body-style="{ paddingBottom: '80px' }"

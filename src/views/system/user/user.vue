@@ -116,7 +116,7 @@
     </a-card>
     <a-drawer
       placement="right"
-      v-model:visible="showModal"
+      v-model:open="showModal"
       :title="addUserFlag ? '新增用户' : '编辑用户'"
       :width="502"
       :body-style="{ paddingBottom: '80px' }"

@@ -80,7 +80,7 @@
       </a-col>
     </a-row>
     <a-drawer
-      v-model:visible="isDrawer"
+      v-model:open="isDrawer"
       width="650"
       placement="right"
       title="添加菜单"

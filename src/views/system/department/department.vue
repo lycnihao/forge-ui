@@ -63,7 +63,7 @@
       </div>
     </a-card>
     <a-modal
-      v-model:visible="isDrawer"
+      v-model:open="isDrawer"
       :confirm-loading="drawerLoading"
       title="添加部门"
       ok-text="确认"
