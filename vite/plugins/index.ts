@@ -2,6 +2,7 @@ import vue from "@vitejs/plugin-vue";
 import type { Plugin, PluginOption } from "vite";
 import { configHtmlPlugin } from "./html";
 import { configMockPlugin } from "./mock";
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
 
 export function createVitePlugins(
@@ -12,6 +13,8 @@ export function createVitePlugins(
   const vitePlugins: (Plugin | PluginOption[])[] = [
     // have to
     vue(),
+    // have to
+    vueJsx(),
     VueSetupExtend(),
   ];
 

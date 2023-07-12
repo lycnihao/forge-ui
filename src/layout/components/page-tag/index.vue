@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import { message } from "ant-design-vue";
 import { AppstoreOutlined, CloseOutlined } from "@ant-design/icons-vue";
-import { computed, ref, watch, reactive, unref, provide } from "vue";
+import { computed, ref, watch, reactive, unref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { PageEnum } from "/@/enums/pageEnum";
 import { useTabsViewStore, RouteItem } from "/@/store/modules/tabsView";
@@ -168,11 +168,14 @@ const removeTab = (route: any) => {
 const reloadPage = () => {
   delKeepAliveCompName();
   router.push({
-    path: "?redirect=" + unref(route).fullPath,
+    path: "/redirect" + unref(route).fullPath,
   });
 };
 // 注入刷新页面方法
-provide("reloadPage", reloadPage);
+// provide("reloadPage", reloadPage);
+defineExpose({
+  reloadPage,
+});
 // 关闭左侧
 // const closeLeft = () => {
 //   tabsViewStore.closeLeftTabs(route);

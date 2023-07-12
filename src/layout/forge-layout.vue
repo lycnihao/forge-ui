@@ -45,7 +45,7 @@
             <HeaderUserSpace />
           </a-col>
         </a-row>
-        <TagsView v-show="pageTagFlag" />
+        <TagsView v-show="pageTagFlag" ref="tagsViewRef" />
       </a-layout-header>
       <a-layout-content class="forge-layout-content">
         <MainView />
@@ -57,9 +57,9 @@
   </a-layout>
 </template>
 <script lang="ts">
-import { defineComponent, ref, unref, computed } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import SiderMenu from "./components/side-menu/index.vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import MainView from "./main-view.vue";
 import TagsView from "./components/page-tag/index.vue";
 import MenuBreadcrumb from "./components/breadcrumb-menu/index.vue";
@@ -78,7 +78,7 @@ export default defineComponent({
     PageFooter,
   },
   setup() {
-    const route = useRoute();
+    const tagsViewRef = ref();
     const router = useRouter();
     const collapsed = ref<boolean>(false);
     const toggleCollapsed = () => {
@@ -89,10 +89,8 @@ export default defineComponent({
       router.replace(path);
     };
     // 刷新页面
-    const reloadPage = () => {
-      router.push({
-        path: "?redirect=" + unref(route).fullPath,
-      });
+    const reloadPage = function() {
+      tagsViewRef.value.reloadPage()
     };
     const settingStore = useProjectSettingStore();
     //主题颜色
@@ -109,6 +107,7 @@ export default defineComponent({
       pageTagFlag,
       footerFlag,
       collapsed,
+      tagsViewRef,
       routerRedirect,
       toggleCollapsed,
       reloadPage,

@@ -34,8 +34,8 @@ export const ErrorPageRoute = {
 export function createRouterGuards(router: Router) {
   const userStore = useUserStoreWidthOut();
   const asyncRouteStore = useAsyncRouteStoreWidthOut();
-
   router.beforeEach(async (to, from, next) => {
+    console.log('beforeEach')
     NProgress.start();
     if (
       from.path === PageEnum.BASE_LOGIN &&
@@ -110,15 +110,18 @@ export function createRouterGuards(router: Router) {
     }
 
     const redirectPath = (from.query.redirect || to.path) as string;
+    console.log(redirectPath, "redirectPath");
     const redirect = decodeURIComponent(redirectPath);
     const nextData =
       to.path === redirect ? { ...to, replace: true } : { path: redirect };
     asyncRouteStore.setDynamicAddedRoute(true);
+    console.log(nextData, "nextData");
     next(nextData);
     NProgress.done();
   });
 
   router.afterEach((to, _, _failure) => {
+    console.log('afterEach')
     document.title = (to?.meta?.title as string) || document.title;
     const asyncRouteStore = useAsyncRouteStoreWidthOut();
     // 在这里设置需要缓存的组件名称
@@ -126,6 +129,7 @@ export function createRouterGuards(router: Router) {
     const currentComName: any = to.matched.find(
       (item) => item.name == to.name
     )?.name;
+    console.log(currentComName)
     if (
       currentComName &&
       !keepAliveComponents.includes(currentComName) &&
@@ -133,7 +137,7 @@ export function createRouterGuards(router: Router) {
     ) {
       // 需要缓存的组件
       keepAliveComponents.push(currentComName);
-    } else if (!to.meta?.keepAlive || to.name == "Redirect") {
+    } else if (!to.meta?.keepAlive || to.name == PageEnum.REDIRECT_NAME) {
       // 不需要缓存的组件
       const index = asyncRouteStore.keepAliveComponents.findIndex(
         (name) => name == currentComName

@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import { routerArray } from "./routers";
 import { createRouterGuards } from "./router-guards";
 import { PageEnum } from "/@/enums/pageEnum";
+import ForgeLayout from "/@/layout/forge-layout.vue";
 
 export const RootRoute: RouteRecordRaw = {
   path: "/",
@@ -11,6 +12,27 @@ export const RootRoute: RouteRecordRaw = {
   meta: {
     title: "Root",
   },
+};
+
+export const RedirectRoute: RouteRecordRaw = {
+  path: '/redirect',
+  name: PageEnum.REDIRECT_NAME,
+  component: ForgeLayout,
+  meta: {
+    title: PageEnum.REDIRECT_NAME,
+    hideBreadcrumb: true,
+  },
+  children: [
+    {
+      path: '/redirect/:path(.*)',
+      name: PageEnum.REDIRECT_NAME,
+      component: () => import('/@/views/support/redirect/index.vue'),
+      meta: {
+        title: PageEnum.REDIRECT_NAME,
+        hideBreadcrumb: true,
+      },
+    },
+  ],
 };
 
 export const LoginRoute: RouteRecordRaw = {
@@ -26,7 +48,7 @@ export const LoginRoute: RouteRecordRaw = {
 export const asyncRoutes = [...routerArray];
 
 // 普通路由 无需验证权限
-export const constantRouter: any[] = [LoginRoute, RootRoute];
+export const constantRouter: any[] = [LoginRoute, RootRoute, RedirectRoute];
 
 const router = createRouter({
   history: createWebHashHistory(""),
